@@ -1,6 +1,30 @@
 import { useState } from "react";
 import Button from "./components/Button";
 
+
+/**
+ *
+ *
+ * @param {{ good: number, neutral: number, bad: number }}
+ * @return {HTMLUListElement}
+ */
+const Statistics = ({ good, neutral, bad }) => {
+  const sum = good + neutral + bad
+
+  if (sum === 0) return <p>no stats recorded yet</p>
+
+  return (
+    <ul>
+      <li>good: {good}</li>
+      <li>neutral: {neutral}</li>
+      <li>bad: {bad}</li>
+      <li>sum: {sum}</li>
+      <li>average: {(good / bad )}</li>
+      <li>positive: {(good/sum)*100 }%</li>
+    </ul>
+  );
+};
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0);
@@ -16,14 +40,7 @@ const App = () => {
         <Button text="bad" onClick={() => setBad(bad + 1)} />
       </div>
       <h2>statistics</h2>
-      <ul>
-        <li>good: {good}</li>
-        <li>neutral: {neutral}</li>
-        <li>bad: {bad}</li>
-        <li>sum: {good + neutral + bad}</li>
-        <li>average: {(good * 1 + bad * -1) / 3}</li>
-        
-      </ul>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </>
   );
 };
