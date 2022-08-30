@@ -33,7 +33,9 @@ const App = () => {
     },
   ]);
 
-  const [selected, setSelected] = useState(genRandomNum(0, anecdotes.length - 1));
+  const [selected, setSelected] = useState(
+    genRandomNum(0, anecdotes.length - 1)
+  );
 
   const handleButtonClick = () =>
     setSelected(genRandomNum(0, anecdotes.length - 1));
@@ -47,10 +49,17 @@ const App = () => {
 
   return (
     <div>
-      <p>{anecdotes[selected].quote}</p>
-      <p>votes: {anecdotes[selected].votes}</p>
-      <button onClick={handleVote}>vote for this</button>
-      <button onClick={handleButtonClick}>gib random quote</button>
+      <div>
+        <h1>random anecdote</h1>
+        <p>{anecdotes[selected].quote}</p>
+        <p>votes: {anecdotes[selected].votes}</p>
+        <button onClick={handleVote}>vote for this</button>
+        <button onClick={handleButtonClick}>gib random quote</button>
+      </div>
+      <div>
+        <h1>most voted</h1>
+        <p>{[...anecdotes].sort((a, b) => b.votes - a.votes)[0].quote}</p>
+      </div>
     </div>
   );
 };
