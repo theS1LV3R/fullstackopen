@@ -1,5 +1,10 @@
 /**
  * @param {{text: string, value: string}}
  */
-const StatisticsLine = ({text, value}) => <li>{text}: {value}</li>
+const StatisticsLine = ({ text, value }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+);
 export default StatisticsLine;

@@ -2,7 +2,6 @@ import { useState } from "react";
 import Button from "./components/Button";
 import StatisticsLine from "./components/StatisticsLine";
 
-
 /**
  *
  *
@@ -10,19 +9,21 @@ import StatisticsLine from "./components/StatisticsLine";
  * @return {HTMLUListElement}
  */
 const Statistics = ({ good, neutral, bad }) => {
-  const sum = good + neutral + bad
+  const sum = good + neutral + bad;
 
-  if (sum === 0) return <p>no stats recorded yet</p>
+  if (sum === 0) return <p>no stats recorded yet</p>;
 
   return (
-    <ul>
-      <StatisticsLine text={"good"} value={good} />
-      <StatisticsLine text={"neutral"} value={neutral} />
-      <StatisticsLine text={"bad"} value={bad} />
-      <StatisticsLine text={"sum"} value={sum} />
-      <StatisticsLine text={"average"} value={(good / bad )} />
-      <StatisticsLine text={"positive"} value={`${(good/sum)*100 }%`} />
-    </ul>
+    <table>
+      <tbody>
+        <StatisticsLine text={"good"} value={good} />
+        <StatisticsLine text={"neutral"} value={neutral} />
+        <StatisticsLine text={"bad"} value={bad} />
+        <StatisticsLine text={"sum"} value={sum} />
+        <StatisticsLine text={"average"} value={(good / bad) || 0} />
+        <StatisticsLine text={"positive"} value={`${(good / sum) * 100}%`} />
+      </tbody>
+    </table>
   );
 };
 
