@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./components/Button";
+import StatisticsLine from "./components/StatisticsLine";
 
 
 /**
@@ -15,12 +16,12 @@ const Statistics = ({ good, neutral, bad }) => {
 
   return (
     <ul>
-      <li>good: {good}</li>
-      <li>neutral: {neutral}</li>
-      <li>bad: {bad}</li>
-      <li>sum: {sum}</li>
-      <li>average: {(good / bad )}</li>
-      <li>positive: {(good/sum)*100 }%</li>
+      <StatisticsLine text={"good"} value={good} />
+      <StatisticsLine text={"neutral"} value={neutral} />
+      <StatisticsLine text={"bad"} value={bad} />
+      <StatisticsLine text={"sum"} value={sum} />
+      <StatisticsLine text={"average"} value={(good / bad )} />
+      <StatisticsLine text={"positive"} value={`${(good/sum)*100 }%`} />
     </ul>
   );
 };
