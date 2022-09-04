@@ -1,8 +1,8 @@
-export default function Total(props) {
+export default function Total({ course }) {
   return (
     <p>
       Number of exercises:{" "}
-      {props.course.parts.reduce((prev, curr) => (prev += curr.exercises), 0)}
+      {course.parts.reduce((prev, curr) => (prev += curr.exercises), 0)}
     </p>
   );
 }
