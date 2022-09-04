@@ -8,10 +8,15 @@ export default function Form({ people, setPeople }) {
   const [newName, setNewName] = useState("");
 
   /**
-   * @param {Event} event
+   * @param {Event}
    */
   const handleFormSubmit = (event) => {
     event.preventDefault();
+
+    if (people.find((p) => (p.name === newName))) {
+      return alert(`${newName} already exists in phonebook`);
+    }
+
     setPeople([...people, { name: newName }]);
     setNewName("");
   };
