@@ -6,6 +6,7 @@ import { useState } from "react";
  */
 export default function Form({ people, setPeople }) {
   const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
 
   /**
    * @param {Event}
@@ -13,12 +14,21 @@ export default function Form({ people, setPeople }) {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    if (people.find((p) => (p.name === newName))) {
+    if (!newName || !newNumber) {
+      return alert("Please fill in all fields, name or number is empty");
+    }
+
+    if (people.find((p) => p.name === newName)) {
       return alert(`${newName} already exists in phonebook`);
     }
 
-    setPeople([...people, { name: newName }]);
+    if (people.find((p) => p.number === newNumber)) {
+      return alert(`${newNumber} already exists in phonebook`);
+    }
+
+    setPeople([...people, { name: newName, number: newNumber }]);
     setNewName("");
+    setNewNumber("");
   };
 
   /**
@@ -26,10 +36,18 @@ export default function Form({ people, setPeople }) {
    */
   const handleNameInputChange = ({ target }) => setNewName(target.value);
 
+  /**
+   * @param {Event}
+   */
+  const handleNumberInputChange = ({ target }) => setNewNumber(target.value);
+
   return (
     <form onSubmit={handleFormSubmit}>
       <div>
         name: <input value={newName} onChange={handleNameInputChange} />
+      </div>
+      <div>
+        number: <input value={newNumber} onChange={handleNumberInputChange} />
       </div>
       <div>
         <button type="submit">add</button>
