@@ -1,6 +1,11 @@
 import Country from "./Country";
+import Result from "./Result";
 
-export default function Resultlist({ countries }) {
+export default function Resultlist({ countries, setSearch, searchString }) {
+  if (searchString === "" ) {
+    return <p>Type in the input to search</p>
+  }
+
   if (countries.length === 0) {
     return <p>No results</p>;
   }
@@ -16,7 +21,7 @@ export default function Resultlist({ countries }) {
   return (
     <ul>
       {countries.map((c) => (
-        <li>{c.name.official}</li>
+        <Result key={c.cca3} country={c} setSearch={setSearch} />
       ))}
     </ul>
   );

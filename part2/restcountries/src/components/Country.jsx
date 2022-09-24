@@ -26,7 +26,7 @@ export default function Country({ country }) {
         ))}
       </ul>
       <picture style={{maxWidth: "100%"}}>
-        <source type="image/svg+xml" srcset={country.flags.svg} />
+        <source type="image/svg+xml" srcSet={country.flags.svg} />
         <img alt={`Flag of ${country.name.official}`} src={country.flags.png} style={{maxWidth: "100%"}} />
       </picture>
     </div>

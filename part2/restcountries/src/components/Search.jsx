@@ -1,11 +1,19 @@
-export default function Search({ searchString, setSearchString }) {
-  const handleSearchInputChange = ({ target }) => setSearchString(target.value);
+export default function Search({ searchString, setSearch }) {
+  const handleSearchInputChange = ({ target }) => setSearch(target.value);
 
   return (
-    <input
-      type="text"
-      value={searchString}
-      onChange={handleSearchInputChange}
-    />
+    <>
+      <input
+        type="text"
+        value={searchString}
+        onChange={handleSearchInputChange}
+      />
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          setSearch("");
+        }}
+      >clear</button>
+    </>
   );
 }

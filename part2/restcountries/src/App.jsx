@@ -9,7 +9,7 @@ const SERVER_URL = "https://restcountries.com/v3.1";
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
-  const [searchString, setSearchString] = useState("");
+  const [searchString, setSearch] = useState("");
 
   useEffect(() => {
     axios.get(`${SERVER_URL}/all`).then((res) => {
@@ -20,7 +20,7 @@ const App = () => {
   useEffect(() => {
     setFilteredCountries(
       countries.filter((c) =>
-        c.name.official.toLowerCase().includes(searchString)
+        c.name.official.toLowerCase().includes(searchString.toLowerCase())
       )
     );
   }, [countries, searchString]);
@@ -28,8 +28,8 @@ const App = () => {
   return (
     <div>
       <h2>Search</h2>
-      <Search searchString={searchString} setSearchString={setSearchString} />
-      <Resultlist countries={filteredCountries} />
+      <Search searchString={searchString} setSearch={setSearch} />
+      <Resultlist countries={filteredCountries} searchString={searchString} setSearch={setSearch} />
     </div>
   );
 };
