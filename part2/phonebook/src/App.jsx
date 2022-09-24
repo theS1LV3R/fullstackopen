@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 import Form from "./components/Form";
 import People from "./components/People";
 import Search from "./components/Search";
 
+const SERVER_URL = "http://localhost:3001";
+
 const App = () => {
-  /** @type {[{name: string, number: string}[], setPeople: Function]} */
-  const [people, setPeople] = useState([
-    { name: "Arto Hellas", number: "040-123456" },
-    { name: "Ada Lovelace", number: "39-44-5323523" },
-    { name: "Dan Abramov", number: "12-43-234345" },
-    { name: "Mary Poppendieck", number: "39-23-6423122" },
-  ]);
+  /** @type {[{name: string, number: string}[], setPeople: (people: {name: string, number: string}[]) => void]} */
+  const [people, setPeople] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${SERVER_URL}/persons`).then((res) => {
+      setPeople(res.data);
+    });
+  }, []);
 
   const [searchString, setSearchString] = useState("");
 
