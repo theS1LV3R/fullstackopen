@@ -1,3 +1,5 @@
+import Weather from "./Weather";
+
 export default function Country({ country }) {
   return (
     <div className="countryinfo">
@@ -25,10 +27,11 @@ export default function Country({ country }) {
           <li key={l}>{l}</li>
         ))}
       </ul>
-      <picture style={{maxWidth: "100%"}}>
+      <picture style={{maxWidth: "250px"}}>
         <source type="image/svg+xml" srcSet={country.flags.svg} />
-        <img alt={`Flag of ${country.name.official}`} src={country.flags.png} style={{maxWidth: "100%"}} />
+        <img alt={`Flag of ${country.name.official}`} src={country.flags.png} style={{maxWidth: "250px"}} />
       </picture>
+      <Weather city={country.capital} />
     </div>
   );
 }
