@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 /**
  *
@@ -27,6 +28,10 @@ export default function Form({ people, setPeople }) {
     }
 
     setPeople([...people, { name: newName, number: newNumber }]);
+    axios.post("http://localhost:3001/persons", {
+      name: newName,
+      number: newNumber,
+    });
     setNewName("");
     setNewNumber("");
   };
