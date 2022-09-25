@@ -20,9 +20,14 @@ async function add(newPerson) {
     .catch((e) => Promise.reject(e));
 }
 
+async function _delete(id) {
+  return await axios.delete(`/persons/${id}`)
+}
+
 const numbers = {
   getAll,
   add,
+  delete: _delete
 };
 
 export default numbers;

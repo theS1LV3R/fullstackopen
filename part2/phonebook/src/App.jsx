@@ -29,6 +29,7 @@ const App = () => {
             .toLowerCase()
             .includes(searchString.toLowerCase())
         )}
+        setPeople={setPeople}
       />
     </div>
   );
