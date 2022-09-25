@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
+import numbers from "./services/numbers";
 
 import Form from "./components/Form";
 import People from "./components/People";
 import Search from "./components/Search";
-
-const SERVER_URL = "http://localhost:3001";
 
 const App = () => {
   /** @type {[{name: string, number: string}[], setPeople: (people: {name: string, number: string}[]) => void]} */
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
-    axios.get(`${SERVER_URL}/persons`).then((res) => {
-      setPeople(res.data);
-    });
+    numbers.getAll().then((num) => setPeople(num));
   }, []);
 
   const [searchString, setSearchString] = useState("");

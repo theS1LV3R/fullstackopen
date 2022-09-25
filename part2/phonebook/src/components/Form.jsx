@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import numbers from "../services/numbers";
 
 /**
  *
@@ -12,7 +12,7 @@ export default function Form({ people, setPeople }) {
   /**
    * @param {Event}
    */
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     if (!newName || !newNumber) {
@@ -27,11 +27,12 @@ export default function Form({ people, setPeople }) {
       return alert(`${newNumber} already exists in phonebook`);
     }
 
-    setPeople([...people, { name: newName, number: newNumber }]);
-    axios.post("http://localhost:3001/persons", {
-      name: newName,
-      number: newNumber,
+    await numbers.add({ name: newName, number: newNumber }).catch((e) => {
+      alert(`Error while adding: ${e}`);
+      console.error(e);
+      Promise.reject(e);
     });
+    setPeople([...people, { name: newName, number: newNumber }]);
     setNewName("");
     setNewNumber("");
   };
