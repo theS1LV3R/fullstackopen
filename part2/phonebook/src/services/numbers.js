@@ -16,18 +16,37 @@ async function getAll() {
  */
 async function add(newPerson) {
   return await axios
-    .post("/persons", newPerson)
+    .post("/persons", JSON.stringify(newPerson), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => JSON.parse(res.data))
     .catch((e) => Promise.reject(e));
 }
 
 async function _delete(id) {
-  return await axios.delete(`/persons/${id}`)
+  return await axios.delete(`/persons/${id}`).catch((e) => Promise.reject(e));
+}
+
+/**
+ * @param {{name: string, number: string}} newData
+ */
+async function update(id, newData) {
+  return await axios
+    .patch(`/persons/${id}`, JSON.stringify(newData), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .catch((e) => Promise.reject(e));
 }
 
 const numbers = {
   getAll,
   add,
-  delete: _delete
+  delete: _delete,
+  update,
 };
 
 export default numbers;

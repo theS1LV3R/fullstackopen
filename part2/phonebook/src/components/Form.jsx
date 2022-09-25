@@ -20,19 +20,33 @@ export default function Form({ people, setPeople }) {
     }
 
     if (people.find((p) => p.name === newName)) {
-      return alert(`${newName} already exists in phonebook`);
+      if (
+        window.confirm(
+          `${newName} already exists in phonebook, replace old number with new?`
+        )
+      ) {
+        const person = people.find((p) => p.name === newName);
+        person.number = newNumber
+
+        await numbers.update(person.id, person);
+
+        setPeople([...people.filter((p) => p.id !== person.id), person]);
+      }
+      return;
     }
 
     if (people.find((p) => p.number === newNumber)) {
       return alert(`${newNumber} already exists in phonebook`);
     }
 
-    await numbers.add({ name: newName, number: newNumber }).catch((e) => {
-      alert(`Error while adding: ${e}`);
-      console.error(e);
-      Promise.reject(e);
-    });
-    setPeople([...people, { name: newName, number: newNumber }]);
+    const { id } = await numbers
+      .add({ name: newName, number: newNumber })
+      .catch((e) => {
+        alert(`Error while adding: ${e}`);
+        console.error(e);
+        Promise.reject(e);
+      });
+    setPeople([...people, { id, name: newName, number: newNumber }]);
     setNewName("");
     setNewNumber("");
   };

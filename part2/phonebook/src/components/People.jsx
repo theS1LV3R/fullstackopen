@@ -15,7 +15,7 @@ export default function People({ people, setPeople }) {
   return (
     <ul>
       {people.map((person) => (
-        <Person key={person.name} person={person} deletePerson={deletePerson} />
+        <Person key={person.id} person={person} deletePerson={deletePerson} />
       ))}
     </ul>
   );
