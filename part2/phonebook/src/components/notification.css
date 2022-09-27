@@ -1,0 +1,27 @@
+:root {
+    --nord-green: #a3be8c;
+    --darker-nord-green: #7da35c;
+    --nord-red: #bf616a;
+    --darker-nord-red: hsl(354, 42%, 40%);
+}
+
+.notification {
+    border: 5px solid var(--border-col);
+    border-radius: 7px;
+    max-width: fit-content;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-col);
+}
+
+.notification.info {
+    --bg-col: var(--nord-green);
+    --border-col: var(--darker-nord-green);
+}
+.notification.error {
+    --bg-col: var(--nord-red);
+    --border-col: var(--darker-nord-red);
+}
+
+.notification.none {
+    display: none;
+}

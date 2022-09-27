@@ -2,7 +2,7 @@ import { Axios } from "axios";
 
 const BASEURL = "http://localhost:3001";
 
-const axios = new Axios({ baseURL: BASEURL });
+const axios = new Axios({ baseURL: BASEURL, validateStatus: (s) => s <= 299 });
 
 async function getAll() {
   return await axios
@@ -33,13 +33,12 @@ async function _delete(id) {
  * @param {{name: string, number: string}} newData
  */
 async function update(id, newData) {
-  return await axios
+  return axios
     .patch(`/persons/${id}`, JSON.stringify(newData), {
       headers: {
         "Content-Type": "application/json",
       },
     })
-    .catch((e) => Promise.reject(e));
 }
 
 const numbers = {
